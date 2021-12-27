@@ -77,7 +77,7 @@ Oracle has announced that it will release Long-term Support (LTS), that is, long
   - Java 9 (2017)
   - Java 10 (2018)
   
-## 7
+## 7
 
 Stack Memory in Java is used for static memory allocation and the execution of a thread. It contains primitive values that are specific to a method and references to objects referred from the method that are in a heap.
 Access to this memory is in Last-In-First-Out (LIFO) order. Whenever we call a new method, a new block is created on top of the stack which contains values specific to that method, like primitive variables and references to objects.
@@ -98,7 +98,8 @@ eap space is used for the dynamic memory allocation of Java objects and JRE clas
   - This memory, in contrast to stack, isn't automatically deallocated. It needs Garbage Collector to free up unused objects so as to keep the efficiency of the memory usage.
   - Unlike stack, a heap isn't threadsafe and needs to be guarded by properly synchronizing the code.
 
-## 8
+
+## 8
 
 Both OpenJDK and Oracle JDK are created and maintained currently by Oracle only.
 
