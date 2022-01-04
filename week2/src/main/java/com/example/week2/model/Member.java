@@ -3,18 +3,21 @@ package com.example.week2.model;
 import com.example.week2.model.util.RandomUtils;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
-import java.util.Random;
+import java.util.List;
 
 @Getter
 @Setter
+@ToString
 public class Member {
 
     private Long id;
     private String name;
     private Date birthDate;
     private String email;
+    private List<WatchList> watchLists;
 
     public Member() {
         this.id = RandomUtils.randomLong();
@@ -55,7 +58,8 @@ public class Member {
 
         public Member build() {
             Member member = new Member();
-            member.setId(id);
+            if(id != null)
+                member.setId(id);
             member.setName(name);
             member.setBirthDate(birthDate);
             member.setEmail(email);
@@ -76,8 +80,8 @@ public class Member {
 
         public static Member generateMember(){
             return MemberBuilder.aMember()
-                    .withEmail("user-x@gmail.com")
-                    .withName("user-x")
+                    .withEmail(RandomUtils.randomEmail())
+                    .withName(RandomUtils.randomName())
                     .withBirthDate(RandomUtils.randomDate())
                     .build();
         }

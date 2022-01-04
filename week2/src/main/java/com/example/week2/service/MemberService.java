@@ -27,7 +27,6 @@ public class MemberService {
         return newMember;
     }
 
-    // Generates and returns random members
     public List<Member> getAll() {
         List<Member> memberList = new ArrayList<>();
         for (int i = 0; i < DUMMY_SIZE; i++) {
@@ -36,7 +35,6 @@ public class MemberService {
         return memberList;
     }
 
-    // Generate random member using Id and return
     public Member getById(Long memberId) {
         return Member.RandomMemberGenerator.generateMemberById(memberId);
 
