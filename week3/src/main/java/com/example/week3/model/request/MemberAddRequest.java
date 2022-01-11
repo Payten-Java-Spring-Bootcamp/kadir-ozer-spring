@@ -1,4 +1,4 @@
-package com.example.week2.model.request;
+package com.example.week3.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

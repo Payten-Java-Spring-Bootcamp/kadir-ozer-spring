@@ -1,4 +1,4 @@
-package com.example.week2.model.util;
+package com.example.week2.util;
 
 
 import com.github.javafaker.Faker;
@@ -13,6 +13,10 @@ public class RandomUtils {
     public static final Random random = new Random();
 
     public static final Faker faker = new Faker();
+
+    private RandomUtils() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static <T extends Enum<?>> T randomEnum(Class<T> clazz) {
         int x = random.nextInt(clazz.getEnumConstants().length);
@@ -43,21 +47,23 @@ public class RandomUtils {
         return faker.bothify("######@gmail.com");
     }
 
-    public static List<String> randomNameList(){
+    public static List<String> randomNameList() {
         List<String> arr = new ArrayList<>();
-        for (int i = 0; i < random.nextInt(0,20); i++) {
+        for (int i = 0; i < random.nextInt(0, 20); i++) {
             arr.add(randomName());
         }
         return arr;
     }
-    public static  List<Long> randomLongList(){
+
+    public static List<Long> randomLongList() {
         List<Long> arr = new ArrayList<>();
-        for (int i = 0; i < random.nextInt(0,20); i++) {
+        for (int i = 0; i < random.nextInt(0, 20); i++) {
             arr.add(randomLong());
         }
         return arr;
     }
-    public static String randomFunnyName(){
+
+    public static String randomFunnyName() {
         return faker.funnyName().name();
     }
 }

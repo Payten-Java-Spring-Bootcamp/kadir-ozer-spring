@@ -1,8 +1,8 @@
-package com.example.week2.controller;
+package com.example.week3.controller;
 
-import com.example.week2.model.Movie;
-import com.example.week2.request.MovieAddRequest;
-import com.example.week2.service.MovieService;
+import com.example.week3.model.response.MovieResponse;
+import com.example.week3.model.request.MovieAddRequest;
+import com.example.week3.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,23 +20,23 @@ public class MovieController {
     }
 
     @PostMapping("/add")
-    public Movie addMovie(@RequestBody MovieAddRequest request) {
+    public MovieResponse addMovie(@RequestBody MovieAddRequest request) {
         return movieService.add(request);
     }
 
     @GetMapping("/list-all")
-    public List<Movie> listMovies() {
+    public List<MovieResponse> listMovies() {
         return movieService.getAll();
     }
 
     @GetMapping("/{movieId}/detail")
-    public Movie showMovie(@PathVariable Long movieId) {
+    public MovieResponse showMovie(@PathVariable Long movieId) {
         return movieService.getById(movieId);
     }
 
     @PutMapping("/{movieId}/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Movie updateMovie(@PathVariable Long movieId, @RequestBody MovieAddRequest request) {
+    public MovieResponse updateMovie(@PathVariable Long movieId, @RequestBody MovieAddRequest request) {
         return movieService.updateMovieById(movieId, request);
     }
 

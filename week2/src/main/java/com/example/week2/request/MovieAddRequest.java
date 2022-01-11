@@ -1,6 +1,6 @@
-package com.example.week2.model.request;
+package com.example.week2.request;
 
-import com.example.week2.model.enums.Genre;
+import com.example.week2.enums.Genre;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

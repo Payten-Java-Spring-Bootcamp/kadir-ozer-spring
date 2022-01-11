@@ -1,9 +1,10 @@
-package com.example.week2.service;
+package com.example.week3.service;
 
-import com.example.week2.model.Movie;
-import com.example.week2.model.Movie.MovieBuilder;
-import com.example.week2.request.MovieAddRequest;
-import com.example.week2.util.RandomUtils;
+import com.example.week3.model.response.MovieResponse;
+import com.example.week3.model.response.MovieResponse.MovieBuilder;
+import com.example.week3.model.request.MovieAddRequest;
+import com.example.week3.util.ObjectGenerator;
+import com.example.week3.util.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class MovieService {
 
     private static final Integer DUMMY_SIZE = RandomUtils.random.nextInt(20);
 
-    public Movie add(MovieAddRequest request) {
+    public MovieResponse add(MovieAddRequest request) {
         final var newMovie = MovieBuilder.aMovie()
                 .withCast(request.getCast())
                 .withDirectorName(request.getDirectorName())
@@ -31,17 +32,17 @@ public class MovieService {
 
 
     // Generates and returns random Movies
-    public List<Movie> getAll() {
-        List<Movie> movieList = new ArrayList<>();
+    public List<MovieResponse> getAll() {
+        List<MovieResponse> movieList = new ArrayList<>();
         for (int i = 0; i < DUMMY_SIZE; i++) {
-            movieList.add(Movie.RandomMovieGenerator.generateMovie());
+            movieList.add(ObjectGenerator.RandomMovieGenerator.generateMovie());
         }
         return movieList;
     }
 
     // Generate random Movie using Id and return
-    public Movie getById(Long movieId) {
-        return Movie.RandomMovieGenerator.generateMovieById(movieId);
+    public MovieResponse getById(Long movieId) {
+        return ObjectGenerator.RandomMovieGenerator.generateMovieById(movieId);
 
     }
 
@@ -49,8 +50,8 @@ public class MovieService {
         log.info("Movie is deleted successfully movieId:{}",movieId);
     }
 
-    public Movie updateMovieById(Long movieId, MovieAddRequest request) {
-        var movie = Movie.RandomMovieGenerator.generateMovieById(movieId);
+    public MovieResponse updateMovieById(Long movieId, MovieAddRequest request) {
+        var movie = ObjectGenerator.RandomMovieGenerator.generateMovieById(movieId);
         movie.setCast(request.getCast());
         movie.setGenre(request.getGenre());
         movie.setName(request.getName());

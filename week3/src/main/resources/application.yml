@@ -1,0 +1,11 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:7575/week3
+        username: kadir
+        password: kadir123
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+        database: POSTGRESQL
+        show-sql: true
+        hibernate:
+            ddl-auto: create-drop

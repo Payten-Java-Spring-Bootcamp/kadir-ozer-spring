@@ -3,7 +3,7 @@ package com.example.week2.controller;
 import com.example.week2.model.Member;
 import com.example.week2.model.Movie;
 import com.example.week2.model.WatchList;
-import com.example.week2.model.request.MemberAddRequest;
+import com.example.week2.request.MemberAddRequest;
 import com.example.week2.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -50,17 +50,19 @@ public class MemberController {
 
     @PostMapping("/{memberId}/rate_movie")
     public Movie rateMovie(@PathVariable Long memberId, @RequestParam Long movieID, @RequestParam Integer point) {
-        return null;
+        return memberService.rateMovie(movieID,point);
     }
 
     @PostMapping("/{memberId}/watchlist/add")
-    public WatchList createWatchList(@PathVariable Long memberId, @RequestParam String watchListName) {
-        return null;
+    @ResponseStatus(HttpStatus.CREATED)
+    public Member createWatchList(@PathVariable Long memberId, @RequestParam String watchListName) {
+        return memberService.createWatchList(memberId,watchListName);
     }
 
-    @PostMapping("/{watchListId}/addMovie")
+    @PutMapping("/{watchListId}/addMovie")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public WatchList addMovieToWatchList(@PathVariable Long watchListId, @RequestParam List<Long> movieIds) {
-        return null;
+        return memberService.addMovieToWatchList(watchListId,movieIds);
     }
 
 

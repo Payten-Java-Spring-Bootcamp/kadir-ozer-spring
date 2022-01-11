@@ -1,7 +1,7 @@
-package com.example.week2.model;
+package com.example.week3.model.response;
 
-import com.example.week2.enums.Genre;
-import com.example.week2.util.RandomUtils;
+import com.example.week3.model.enums.Genre;
+import com.example.week3.util.RandomUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Movie {
+public class MovieResponse {
 
     private Long id;
     private String name;
@@ -19,38 +19,9 @@ public class Movie {
     private Integer releaseYear;
     private String directorName;
     private List<String> cast;
-    private Integer rating = 0;
 
-    public Movie() {
+    public MovieResponse() {
         this.id = RandomUtils.randomLong();
-    }
-
-    public static final class RandomMovieGenerator {
-
-        private RandomMovieGenerator(){
-            throw new IllegalStateException("Generator Class");
-        }
-
-        public static Movie generateMovieById(Long movieId) {
-            return MovieBuilder.aMovie()
-                    .withId(movieId)
-                    .withName("movie-" + movieId)
-                    .withGenre(RandomUtils.randomEnum(Genre.class))
-                    .withDirectorName("director-" + movieId)
-                    .withCast(List.of())
-                    .withReleaseYear(RandomUtils.randomYear())
-                    .build();
-        }
-
-        public static Movie generateMovie() {
-            return MovieBuilder.aMovie()
-                    .withName(RandomUtils.randomTitle())
-                    .withGenre(RandomUtils.randomEnum(Genre.class))
-                    .withDirectorName(RandomUtils.randomName())
-                    .withCast(RandomUtils.randomNameList())
-                    .withReleaseYear(RandomUtils.randomYear())
-                    .build();
-        }
     }
 
     public static final class MovieBuilder {
@@ -60,7 +31,6 @@ public class Movie {
         private Integer releaseYear;
         private String directorName;
         private List<String> cast;
-        private Integer rating = 0;
 
         private MovieBuilder() {
         }
@@ -99,20 +69,14 @@ public class Movie {
             return this;
         }
 
-        public MovieBuilder withRating(Integer rating) {
-            this.rating = rating;
-            return this;
-        }
-
-        public Movie build() {
-            Movie movie = new Movie();
+        public MovieResponse build() {
+            MovieResponse movie = new MovieResponse();
             movie.setId(id);
             movie.setName(name);
             movie.setGenre(genre);
             movie.setReleaseYear(releaseYear);
             movie.setDirectorName(directorName);
             movie.setCast(cast);
-            movie.setRating(rating);
             return movie;
         }
     }

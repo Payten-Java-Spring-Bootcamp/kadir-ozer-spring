@@ -1,6 +1,6 @@
 package com.example.week2.model;
 
-import com.example.week2.model.util.RandomUtils;
+import com.example.week2.util.RandomUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +14,10 @@ public class WatchList {
     private Long id;
     private String name;
     private List<Long> movies;
+
+    public void addMoviesToList(List<Long> movieIds) {
+        this.movies.addAll(movieIds);
+    }
 
     public static final class WatchListBuilder {
         private Long id;
@@ -52,15 +56,19 @@ public class WatchList {
         }
     }
 
-    public static final class WatchListGenerator {
-        public WatchList generateWatchList() {
+    public static final class RandomWatchListGenerator {
+
+        private RandomWatchListGenerator(){
+            throw new IllegalStateException("Generator class");
+        }
+        public static WatchList generateWatchList() {
             return WatchListBuilder.aWatchList()
                     .withName(RandomUtils.randomFunnyName())
                     .withMovies(RandomUtils.randomLongList())
                     .build();
         }
 
-        public WatchList generateWatchListById(Long watchListId) {
+        public static WatchList generateWatchListById(Long watchListId) {
             return WatchListBuilder.aWatchList()
                     .withId(watchListId)
                     .withName(RandomUtils.randomName())

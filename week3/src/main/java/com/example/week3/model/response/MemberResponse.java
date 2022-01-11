@@ -1,31 +1,26 @@
-package com.example.week2.model;
+package com.example.week3.model.response;
 
-import com.example.week2.util.RandomUtils;
+import com.example.week3.util.RandomUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
 @ToString
-public class Member {
+public class MemberResponse {
 
     private Long id;
     private String name;
     private Date birthDate;
     private String email;
-    private List<WatchList> watchLists;
 
-    public Member() {
+    public MemberResponse() {
         this.id = RandomUtils.randomLong();
     }
 
-    public void addToWatchLists(WatchList watchList) {
-        this.watchLists.add(watchList);
-    }
     public static final class MemberBuilder {
         private Long id;
         private String name;
@@ -59,9 +54,9 @@ public class Member {
             return this;
         }
 
-        public Member build() {
-            Member member = new Member();
-            if(id != null)
+        public MemberResponse build() {
+            MemberResponse member = new MemberResponse();
+            if (id != null)
                 member.setId(id);
             member.setName(name);
             member.setBirthDate(birthDate);
@@ -70,28 +65,4 @@ public class Member {
         }
     }
 
-    public static final class RandomMemberGenerator{
-
-        private RandomMemberGenerator(){
-            throw new IllegalStateException("Generator Class");
-        }
-
-        public static Member generateMemberById(Long memberId){
-            return MemberBuilder.aMember()
-                    .withId(memberId)
-                    .withEmail("user"+memberId.toString()+"@gmail.com")
-                    .withBirthDate(RandomUtils.randomDate())
-                    .withName("user"+memberId)
-                    .build();
-        }
-
-        public static Member generateMember(){
-            return MemberBuilder.aMember()
-                    .withEmail(RandomUtils.randomEmail())
-                    .withName(RandomUtils.randomName())
-                    .withBirthDate(RandomUtils.randomDate())
-                    .build();
-        }
-
-    }
 }

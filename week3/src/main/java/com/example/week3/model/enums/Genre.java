@@ -1,4 +1,4 @@
-package com.example.week2.model.enums;
+package com.example.week3.model.enums;
 
 public enum Genre {
     ADULT,
