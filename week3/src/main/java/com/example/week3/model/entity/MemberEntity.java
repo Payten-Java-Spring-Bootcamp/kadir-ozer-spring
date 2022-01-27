@@ -1,7 +1,10 @@
 package com.example.week3.model.entity;
 
 
+import com.example.week3.model.Member;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +15,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@Builder
 @Table(name = "member")
 public class MemberEntity {
 
@@ -31,4 +36,7 @@ public class MemberEntity {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     Set<WatchListEntity> watchlists = new HashSet<>();
+
+    public void func(){
+    }
 }
