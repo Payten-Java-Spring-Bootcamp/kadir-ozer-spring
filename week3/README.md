@@ -15,29 +15,44 @@ Spring provides @Primary annotation which declares a specific bean as primary, w
 On the other hand, Spring also provides @Qualifier annotation in which the specific bean name is mentioned in its argument. Based on the argument, a specific bean is selected.
 
 ## 4
+Speaking of ORM, most software developers need a library that implements the Object-Relational Mapping technique.
 
+An ORM library pulls data in and manipulates it into objects in the programming language you are using, so you don't need to use sql anymore. You communicate directly with the database in the language you are using.
+
+Disadvantages of ORM Technique
+
+Learning ORM theory and technique can take time. ORM libraries are quite complex libraries.
+ORM tools need to be configured and integrated into the application. (This integrated process can be done quickly and easily with other frameworks. For example, Spring Framework for Java, especially Spring Boot and Spring Data can be used)
+In applications that require high performance or contain complex queries, ORM queries can offer poor performance if not optimized.
 ## 5
 
-Aspect-Oriented Programming entails breaking down program logic into distinct parts called so-called concerns. The functions that span multiple points of an application are called cross-cutting concerns and these cross-cutting concerns are conceptually separate from the application's business logic. There are various common good examples of aspects like logging, auditing, declarative transactions, security, caching, etc.
+Domain Specific Language (DSL) is a programming language or specification language specified for a particular problem domain, a particular problem presentation technique, and/or a particular solution technique.
+
+It is a programming language developed for a specific subject rather than a general programming language. Scanner and parser languages such as yacc, lex, or a database language such as sql can be given as examples. To give a different example: a language for performing boolean algebra operations, set theory language, web server performance profiling, etc. it could be. In other words, languages that are customized for any business imaginable are called domain specific languages. Its purpose is to simplify programming, often to improve performance.
 
 ## 6
 
-The following five concepts make up our SOLID principles:
-
-  - Single Responsibility (a class should only have one responsibility. Furthermore, it should only have one reason to change.)
-  - Open/Closed (classes should be open for extension but closed for modification.)
-  - Liskov Substitution (if class A is a subtype of class B, we should be able to replace B with A without disrupting the behavior of our program.)
-  - Interface Segregation (larger interfaces should be split into smaller ones.)
-  - Dependency Inversion (The principle of dependency inversion refers to the decoupling of software modules.)
-
 ## 7
+While threads provide benefits for us in many ways, they are also a headache if they are used in an uncontrolled manner. Since threads also use the resources of the operating system, when they are used in an uncontrolled manner, we will quickly consume these resources. For example, even if it is necessary to run 4 threads in an environment where we have 2 processor cores, we must wait for the first 2 to finish and then create and run the other 2. Instead of following this event in this way, we can use the Thread pools provided by Java. Java offers us a class called Executor for the regular and controlled execution of thread count and operation.
 
-Swagger is a set of rules (in other words, a specification) for a format describing REST APIs. The format is both machine-readable and human-readable. As a result, it can be used to share documentation among product managers, testers and developers, but can also be used by various tools to automate API-related processes.
+To briefly summarize its usage:
 
+ExecutorService asks us how many Threads we want to run at a given time.
+This number can be specified with the newFixedThreadPool() method.
+We add our threads to the executorService with the ExecutorService.submit() method.
+As long as there is room in the "ExecutorService" pool, it creates a new thread with the Runnable objects added to it and starts it.
+Transactions added later are queued and run as existing transactions are finished.
+The shutdown() method, on the other hand, stops receiving new processes and ensures that existing processes are terminated.
+awaitTermination() gives a certain time for the current processes to finish, after which the ExecutorService is closed completely.
 ## 8
 
+Scalability is not a concept unique to programming languages. It is about how the system reacts to this increase with the increasing number of users in the system. The system infrastructure should be designed according to the number of users it addresses. For example, you wrote a program on android and you keep your data in a system that can handle requests from 100-200 users. When 10,000 people download this program from the play store and start using it, the system will become unable to respond to requests. In order to prevent these problems, there are cloud services such as Amazon and Azure today. How many users are connected and how many requests are made, payment is made per request.
+
+Horizontal Scability & Vertical Scability
+
+Vertical scalability is making your existing machine more powerful by increasing its CPU and RAM features. Horizontal scalability is adding more machines to your existing resource pool. With the use of load balancers in horizontal scalability, the load of the system is equally distributed to all machines.
+
+With horizontal scalability, dynamically adding new machines to an existing resource pool is less costly, easier, and can be added as many times as desired. Vertical scalability, on the other hand, has an upper limit on the features you can add to a machine. In other words, you can increase the features that a single machine can be increased up to a certain point.
 ## 9
 
-## 10
-
-## 11
+Sharding is partitioning in which the database is split into multiple smaller databases to improve performance and read time. Replication is basically an event to copy the database to multiple databases to provide a faster view and less response time. Content delivery networks are the best examples of this.
