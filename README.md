@@ -15,4 +15,18 @@
 	- Spring Boot
 	- Spring Core vs Spring Boot & Spring Cloud
 	- Spring Boot Configurations
-
+## - [Week3](./week3/)
+	- Relational Databases
+	- Spring Data
+	- JPA
+	- Hibernate
+## - [Week4](./week4/)
+	- Xunit patterns
+	- Mock-stub-fake
+	- Unit test
+	- Integration test
+	- Contract test
+## - [Week5](./week5/)
+	- NoSql Solutions
+	- Redis
+	- Hexagonal Architecture
