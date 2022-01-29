@@ -10,10 +10,6 @@ The disadvantages of indexes are as follows:
 - Some databases will monocase values in fields that are indexed.
 ## 3
 
-Spring provides @Primary annotation which declares a specific bean as primary, which means primary bean will be given higher preferences when autowiring to a single-valued dependency.
-
-On the other hand, Spring also provides @Qualifier annotation in which the specific bean name is mentioned in its argument. Based on the argument, a specific bean is selected.
-
 ## 4
 Speaking of ORM, most software developers need a library that implements the Object-Relational Mapping technique.
 
