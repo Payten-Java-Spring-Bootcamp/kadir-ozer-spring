@@ -7,7 +7,9 @@ import com.example.week3.repository.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -48,5 +50,9 @@ public class MovieService {
 
     protected MovieEntity getEntityById(Long movieId) {
         return movieRepository.getById(movieId);
+    }
+
+    protected Set<MovieEntity> findAllMoviesByIdList(Set<Long> movieIdList) {
+        return new HashSet<>(movieRepository.findAllByIdIn(movieIdList));
     }
 }

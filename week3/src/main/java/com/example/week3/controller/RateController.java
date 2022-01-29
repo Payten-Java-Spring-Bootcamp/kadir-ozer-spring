@@ -28,12 +28,6 @@ public class RateController {
 
         return rate.toResponse();
     }
-
-//    @PostMapping("/{memberId}/watchlist/add")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public MemberResponse createWatchList(@PathVariable Long memberId, @RequestParam String watchListName) {
-//        return memberService.createWatchList(memberId,watchListName);
-//    }
 //
 //    @PutMapping("/{watchListId}/addMovie")
 //    @ResponseStatus(HttpStatus.ACCEPTED)

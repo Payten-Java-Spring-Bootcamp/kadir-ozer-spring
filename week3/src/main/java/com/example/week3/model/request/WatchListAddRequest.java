@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,10 +19,13 @@ public class WatchListAddRequest {
     @NotNull
     private Long memberId;
 
+    private Set<Long> movieIdList;
+
     public WatchList convert() {
         return WatchList.builder()
                 .name(getName())
                 .memberId(getMemberId())
+                .movieIdList(getMovieIdList())
                 .build();
     }
 }

@@ -1,16 +1,19 @@
 package com.example.week3.model.response;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @ToString
 public class WatchListResponse {
     private Long id;
     private String name;
-    private List<Long> movies;
+    private Long memberId;
+    private Set<MovieResponse> movies;
 }

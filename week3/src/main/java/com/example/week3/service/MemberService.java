@@ -48,6 +48,10 @@ public class MemberService {
         return null;
     }
 
+    protected MemberEntity getEntityById(Long memberId) {
+        return memberRepository.getById(memberId);
+    }
+
 //    public MovieResponse rateMovie(Long movieID, Integer point) {
 //        var movie = ObjectGenerator.RandomMovieGenerator.generateMovieById(movieID);
 //        movie.setRating(point);
