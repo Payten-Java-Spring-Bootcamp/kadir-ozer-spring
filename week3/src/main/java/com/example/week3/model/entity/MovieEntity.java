@@ -1,9 +1,6 @@
 package com.example.week3.model.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -17,6 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name = "movie")
 public class MovieEntity {
@@ -28,6 +26,7 @@ public class MovieEntity {
     @Column(nullable = false)
     private String name;
 
+    @Column
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
@@ -35,14 +34,13 @@ public class MovieEntity {
     private String director;
 
     @ElementCollection
-    private List<String> cast;
+    @CollectionTable(name = "movie_players", joinColumns = @JoinColumn(name = "movie_id"))
+    @Column(name = "players")
+    private Set<String> cast = new HashSet<>();
 
     private Integer releaseYear;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn( name = "movie_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RateEntity> rates = new HashSet<>();
-
-
 
 }

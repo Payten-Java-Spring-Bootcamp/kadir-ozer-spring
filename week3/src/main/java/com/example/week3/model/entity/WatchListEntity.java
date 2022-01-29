@@ -1,10 +1,7 @@
 package com.example.week3.model.entity;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,6 +11,7 @@ import java.util.Set;
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name = "watchlist")
 public class WatchListEntity {
@@ -24,6 +22,10 @@ public class WatchListEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id", referencedColumnName = "id")
+    private MemberEntity member;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "watchlist_movie",

@@ -3,16 +3,18 @@ package com.example.week3.model;
 import com.example.week3.model.entity.MovieEntity;
 import com.example.week3.model.entity.RateEntity;
 import com.example.week3.model.enums.Genre;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.week3.model.response.MovieResponse;
+import lombok.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Movie {
 
@@ -20,7 +22,7 @@ public class Movie {
     private String name;
     private Genre genre;
     private String director;
-    private List<String> cast;
+    private Set<String> cast;
     private Integer releaseYear;
     private Double overallRating;
 
@@ -43,10 +45,23 @@ public class Movie {
                 .director(movieEntity.getDirector())
                 .cast(movieEntity.getCast())
                 .releaseYear(movieEntity.getReleaseYear())
-                .overallRating(movieEntity.getRates().stream()
+                .overallRating(Optional.ofNullable(movieEntity.getRates())
+                        .orElseGet(Collections::emptySet).stream()
                         .mapToDouble(RateEntity::getPoint)
                         .average()
                         .orElse(0))
+                .build();
+    }
+
+    public MovieResponse toResponse() {
+        return MovieResponse.builder()
+                .id(getId())
+                .name(getName())
+                .genre(getGenre())
+                .directorName(getDirector())
+                .cast(getCast())
+                .releaseYear(getReleaseYear())
+                .overallRating(getOverallRating())
                 .build();
     }
 }

@@ -1,31 +1,27 @@
 package com.example.week3.model.request;
 
-import com.example.week3.model.Member;
+import com.example.week3.model.WatchList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
-
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class MemberAddRequest {
-
+public class WatchListAddRequest {
     @NotBlank
     private String name;
 
-    private Date birthDate;
+    @NotNull
+    private Long memberId;
 
-    private String email;
-
-    public Member convert(){
-        return Member.builder()
+    public WatchList convert() {
+        return WatchList.builder()
                 .name(getName())
-                .birthDate(getBirthDate())
-                .email(getEmail())
+                .memberId(getMemberId())
                 .build();
     }
 }

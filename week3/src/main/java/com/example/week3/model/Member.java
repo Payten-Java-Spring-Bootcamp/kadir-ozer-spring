@@ -1,18 +1,15 @@
 package com.example.week3.model;
 
 import com.example.week3.model.entity.MemberEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.week3.model.response.MemberResponse;
+import lombok.*;
 
 import java.util.Date;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Member {
 
@@ -20,7 +17,6 @@ public class Member {
     private String name;
     private Date birthDate;
     private String email;
-    private Set<WatchList> watchLists;
 
 
     public static Member convertFromEntity(MemberEntity memberEntity) {
@@ -29,10 +25,6 @@ public class Member {
                 .name(memberEntity.getName())
                 .birthDate(memberEntity.getBirthDate())
                 .email(memberEntity.getEmail())
-                .watchLists(memberEntity.getWatchlists()
-                        .stream()
-                        .map(WatchList::convertFromEntity)
-                        .collect(Collectors.toSet()))
                 .build();
     }
 
@@ -42,10 +34,15 @@ public class Member {
                 .name(member.getName())
                 .birthDate(member.getBirthDate())
                 .email(member.getEmail())
-                .watchlists(member.getWatchLists()
-                        .stream()
-                        .map(WatchList::convertToEntity)
-                        .collect(Collectors.toSet()))
+                .build();
+    }
+
+    public MemberResponse toResponse() {
+        return MemberResponse.builder()
+                .id(getId())
+                .name(getName())
+                .birthDate(getBirthDate())
+                .email(getEmail())
                 .build();
     }
 }

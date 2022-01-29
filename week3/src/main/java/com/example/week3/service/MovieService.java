@@ -1,64 +1,52 @@
 package com.example.week3.service;
 
-import com.example.week3.model.response.MovieResponse;
-import com.example.week3.model.response.MovieResponse.MovieBuilder;
+import com.example.week3.model.Movie;
+import com.example.week3.model.entity.MovieEntity;
 import com.example.week3.model.request.MovieAddRequest;
-import com.example.week3.util.ObjectGenerator;
-import com.example.week3.util.RandomUtils;
+import com.example.week3.repository.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class MovieService {
 
-    private static final Integer DUMMY_SIZE = RandomUtils.random.nextInt(20);
+    private final MovieRepository movieRepository;
 
-    public MovieResponse add(MovieAddRequest request) {
-        final var newMovie = MovieBuilder.aMovie()
-                .withCast(request.getCast())
-                .withDirectorName(request.getDirectorName())
-                .withGenre(request.getGenre())
-                .withName(request.getName())
-                .withReleaseYear(request.getReleaseYear())
-                .build();
-
-        log.info("New Movie is created successfully Movie:{}", newMovie);
-        return newMovie;
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
+    public Movie add(Movie movie) {
+        final var newEntity = movieRepository.save(Movie.convertToEntity(movie));
 
-    // Generates and returns random Movies
-    public List<MovieResponse> getAll() {
-        List<MovieResponse> movieList = new ArrayList<>();
-        for (int i = 0; i < DUMMY_SIZE; i++) {
-            movieList.add(ObjectGenerator.RandomMovieGenerator.generateMovie());
-        }
-        return movieList;
+        log.info("New Movie is created successfully Movie:{}", newEntity);
+        return Movie.convertFromEntity(newEntity);
     }
 
-    // Generate random Movie using Id and return
-    public MovieResponse getById(Long movieId) {
-        return ObjectGenerator.RandomMovieGenerator.generateMovieById(movieId);
+    public List<Movie> getAll() {
+        List<MovieEntity> movieList = movieRepository.findAll();
+        return movieList.stream().map(Movie::convertFromEntity).collect(Collectors.toList());
+    }
 
+    public Movie getById(Long movieId) {
+        final var movieEntity = movieRepository.getById(movieId);
+        return Movie.convertFromEntity(movieEntity);
     }
 
     public void deleteMovieById(Long movieId) {
-        log.info("Movie is deleted successfully movieId:{}",movieId);
+        log.info("Movie is deleted successfully movieId:{}", movieId);
     }
 
-    public MovieResponse updateMovieById(Long movieId, MovieAddRequest request) {
-        var movie = ObjectGenerator.RandomMovieGenerator.generateMovieById(movieId);
-        movie.setCast(request.getCast());
-        movie.setGenre(request.getGenre());
-        movie.setName(request.getName());
-        movie.setDirectorName(request.getDirectorName());
-        movie.setReleaseYear(request.getReleaseYear());
-        return movie;
+    public Movie updateMovieById(Long movieId, MovieAddRequest request) {
+        return null;
     }
 
 
+    protected MovieEntity getEntityById(Long movieId) {
+        return movieRepository.getById(movieId);
+    }
 }

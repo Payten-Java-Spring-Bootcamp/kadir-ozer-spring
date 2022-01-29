@@ -1,12 +1,14 @@
 package com.example.week3.controller;
 
-import com.example.week3.model.response.MovieResponse;
+import com.example.week3.model.Movie;
 import com.example.week3.model.request.MovieAddRequest;
+import com.example.week3.model.response.MovieResponse;
 import com.example.week3.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -20,24 +22,28 @@ public class MovieController {
     }
 
     @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
     public MovieResponse addMovie(@RequestBody MovieAddRequest request) {
-        return movieService.add(request);
+        final var newMovie = movieService.add(request.convert());
+        return newMovie.toResponse();
     }
 
     @GetMapping("/list-all")
     public List<MovieResponse> listMovies() {
-        return movieService.getAll();
+        final var movieList = movieService.getAll();
+        return movieList.stream().map(Movie::toResponse).collect(Collectors.toList());
     }
 
     @GetMapping("/{movieId}/detail")
     public MovieResponse showMovie(@PathVariable Long movieId) {
-        return movieService.getById(movieId);
+        final var movie = movieService.getById(movieId);
+        return movie.toResponse();
     }
 
     @PutMapping("/{movieId}/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public MovieResponse updateMovie(@PathVariable Long movieId, @RequestBody MovieAddRequest request) {
-        return movieService.updateMovieById(movieId, request);
+        return movieService.updateMovieById(movieId, request).toResponse();
     }
 
     @DeleteMapping("/{movieId}/remove")

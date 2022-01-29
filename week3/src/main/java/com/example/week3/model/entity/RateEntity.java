@@ -1,17 +1,15 @@
 package com.example.week3.model.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name = "rate")
 public class RateEntity {
@@ -21,12 +19,15 @@ public class RateEntity {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDateTime createdDate;
+    private Date createdDate;
 
     @Column(nullable = false)
     private Integer point;
 
+    @Column
+    private Long memberId;
+
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private MemberEntity member;
+    @JoinColumn(nullable = false)
+    private MovieEntity movie;
 }

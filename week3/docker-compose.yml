@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   postgresql:
-    image: postgres:9.6.16
+    image: postgres
     environment:
       - POSTGRES_USER=kadir
       - POSTGRES_PASSWORD=kadir123

@@ -1,21 +1,16 @@
 package com.example.week3.model.entity;
 
 
-import com.example.week3.model.Member;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name = "member")
 public class MemberEntity {
@@ -32,11 +27,4 @@ public class MemberEntity {
 
     @Column(nullable = false)
     private String email;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id", referencedColumnName = "id")
-    Set<WatchListEntity> watchlists = new HashSet<>();
-
-    public void func(){
-    }
 }
